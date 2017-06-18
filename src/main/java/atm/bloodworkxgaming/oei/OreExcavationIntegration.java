@@ -24,60 +24,11 @@ public class OreExcavationIntegration
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-        // some example code
+
         logger.info("Removing the BlockBreak event from OreExcavation");
         MinecraftForge.EVENT_BUS.register(new atm.bloodworkxgaming.oei.Handler.EventHandler());
 
         GameRegistry.register(new ExcavationEnchantment(), new ResourceLocation("oreexcavation"));
-
-
-        /*
-        try {
-
-            Field field = MinecraftForge.EVENT_BUS.getClass().getDeclaredField("listeners");
-            field.setAccessible(true);
-
-            ConcurrentHashMap<Object, ArrayList<IEventListener>> listenerMap = (ConcurrentHashMap<Object, ArrayList<IEventListener>>) field.get(MinecraftForge.EVENT_BUS);
-
-
-            System.out.println("all registered Listeners");
-            System.out.println(listenerMap.toString());
-            listenerMap.entrySet().removeIf(entry -> entry.getKey() instanceof oreexcavation.handlers.EventHandler);
-
-
-            listenerMap = (ConcurrentHashMap<Object, ArrayList<IEventListener>>) field.get(MinecraftForge.EVENT_BUS);
-            System.out.println(listenerMap.toString());
-
-
-            /*
-                listenerMap.forEach((k, v) -> {
-                if (k instanceof oreexcavation.handlers.EventHandler){
-
-                    System.out.println(v.toString());
-                    for (int i = v.size() - 1; i >= 0; i--){
-                        if (v.get(i).toString().contains("onBlockBreak(Lnet/minecraftforge/event/world/BlockEvent$BreakEvent;)V")){
-                            v.remove(i);
-                        }
-                    }
-
-                    System.out.println(v.toString());
-                }
-            });
-            */
-
-
-            /*
-            for (Map.Entry<Object, ArrayList<IEventListener>> entry : listenerMap.entrySet())
-            {
-                System.out.println(entry.getKey() + "/" + entry.getValue());
-            }
-            */
-
-        /*
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-        */
 
     }
 }
