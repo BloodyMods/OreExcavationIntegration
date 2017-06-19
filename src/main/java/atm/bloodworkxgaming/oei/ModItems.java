@@ -1,5 +1,6 @@
 package atm.bloodworkxgaming.oei;
 
+import atm.bloodworkxgaming.oei.Common.Items.ItemExcavateModifier;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -8,18 +9,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class ModItems {
 
-    // public  static FirstItem firstItem;
+    public  static ItemExcavateModifier itemExcavateModifier;
+
 
 
 
     public static void init(){
         // init of all items
-        // firstItem = new FirstItem();
+        itemExcavateModifier = new ItemExcavateModifier();
     }
 
 
     @SideOnly(Side.CLIENT)
     public static void initModels(){
-        // simpleTexturedItem.initModel();
+        itemExcavateModifier.initModel();
+
     }
 }

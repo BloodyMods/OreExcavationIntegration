@@ -1,10 +1,15 @@
 package atm.bloodworkxgaming.oei;
 
+import atm.bloodworkxgaming.oei.Integrations.TiC_Modifiers;
+import atm.bloodworkxgaming.oei.Proxy.CommonProxy;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,18 +22,43 @@ public class OreExcavationIntegration
     public static final String MOD_NAME = "OreExcavationIntegration";
     public static final String DEPENDENCIES = "after:oreexcavation";
 
+    @Mod.Instance
+    public static OreExcavationIntegration instance;
+
+
+    @SidedProxy(clientSide = "atm.bloodworkxgaming.oei.Proxy.ClientProxy", serverSide = "atm.bloodworkxgaming.oei.Proxy.ServerProxy")
+    public static CommonProxy proxy;
 
     public static final Logger logger = LogManager.getLogger(MOD_ID);
+
+
+
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event)
+    {
+        proxy.preInit();
+
+        TiC_Modifiers.register();
+
+        MinecraftForge.EVENT_BUS.register(new atm.bloodworkxgaming.oei.Handler.EventHandler());
+
+        GameRegistry.register(new ExcavationEnchantment(), new ResourceLocation("oei:oreexcavation"));
+
+
+    }
+
 
 
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-
-        logger.info("Removing the BlockBreak event from OreExcavation");
-        MinecraftForge.EVENT_BUS.register(new atm.bloodworkxgaming.oei.Handler.EventHandler());
-
-        GameRegistry.register(new ExcavationEnchantment(), new ResourceLocation("oreexcavation"));
-
+        proxy.init();
     }
+
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event)
+    {
+        proxy.postInit();
+    }
+
 }
