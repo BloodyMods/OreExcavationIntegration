@@ -11,7 +11,7 @@ import slimeknights.tconstruct.library.modifiers.ModifierAspect;
 public class ExcavateModifier extends Modifier {
 
     public ExcavateModifier() {
-        super("excavate");
+        super("oreexcavate");
         this.addAspects(ModifierAspect.toolOnly, new ModifierAspect.SingleAspect(this), new ModifierAspect.DataAspect(this, 0xCC6600));
         this.addItem(ModItems.itemExcavateModifier);
     }

@@ -20,7 +20,7 @@ public class ExcavationEnchantment extends Enchantment {
      */
     public int getMinEnchantability(int enchantmentLevel)
     {
-        return 10;
+        return 20;
     }
 
     /**
@@ -38,6 +38,8 @@ public class ExcavationEnchantment extends Enchantment {
     {
         return 1;
     }
+
+
 
     @Override
     public String getTranslatedName(int level) {

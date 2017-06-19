@@ -4,6 +4,6 @@ enchantment.oreexcavation=Excavate
 item.oei.excavatemodifier.name=Excavate Modifier
 
 # modifiers names
-modifier.excavate.name=Excavate
+modifier.oreexcavate.name=Excavate
 # desc
-modifier.excavate.desc=Allows this tool to be used with OreExcavation
+modifier.oreexcavate.desc=Allows this tool to be used with OreExcavation
