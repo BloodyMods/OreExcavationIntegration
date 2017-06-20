@@ -20,11 +20,6 @@ compileJava {
     sourceCompatibility = targetCompatibility = "1.8"
 }
 
-sourceSets {
-    main { output.resourcesDir = output.classesDir }
-}
-
-
 minecraft {
     version = "1.11.2-13.20.0.2315"
     runDir = "run"
@@ -80,5 +75,3 @@ processResources {
         exclude 'mcmod.info'
     }
 }
-
-// sourceSets { main { output.resourcesDir = output.classesDir } }
