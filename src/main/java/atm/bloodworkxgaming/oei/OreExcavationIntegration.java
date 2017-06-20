@@ -1,9 +1,8 @@
 package atm.bloodworkxgaming.oei;
 
+import atm.bloodworkxgaming.oei.Crafting.ModCrafting;
 import atm.bloodworkxgaming.oei.Integrations.TiC_Modifiers;
 import atm.bloodworkxgaming.oei.Proxy.CommonProxy;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -12,7 +11,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -45,8 +43,7 @@ public class OreExcavationIntegration
             TiC_Modifiers.register();
         }
 
-        GameRegistry.register(new ExcavationEnchantment(), new ResourceLocation("oei:oreexcavation"));
-
+        ModEnchantments.registerEnchantments();
         MinecraftForge.EVENT_BUS.register(new atm.bloodworkxgaming.oei.Handler.EventHandler());
     }
 
@@ -56,6 +53,8 @@ public class OreExcavationIntegration
     public void init(FMLInitializationEvent event)
     {
         proxy.init();
+        ModCrafting.initCrafting();
+
     }
 
     @EventHandler

@@ -33,16 +33,18 @@ public class EventHandler {
 
     static {
         try {
+            // Steals access to the banlist
             Field fieldBanList = ItemBlacklist.INSTANCE.getClass().getDeclaredField("banList");
             fieldBanList.setAccessible(true);
             banList = (List<ItemEntry>) fieldBanList.get(ItemBlacklist.INSTANCE);
 
+            // resets it to work as a kill switch
+            originalBanList.addAll(banList);
+            banList.clear();
+
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
-
-        originalBanList.addAll(banList);
-        banList.clear();
 
         ExcavationSettings.invertTBlacklist = true;
     }
@@ -145,13 +147,14 @@ public class EventHandler {
     }
 
 
-    public void allowExcavation(){
+    public static void allowExcavation(){
         ExcavationSettings.invertTBlacklist = false;
     }
 
 
-    public void prohibitExcavation(){
+    public static void prohibitExcavation(){
         ExcavationSettings.invertTBlacklist = true;
+
     }
 
     public boolean isToolBlacklisted(ItemStack stack)

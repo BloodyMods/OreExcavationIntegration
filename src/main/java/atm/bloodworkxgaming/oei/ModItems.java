@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  */
 public class ModItems {
 
-    public  static ItemExcavateModifier itemExcavateModifier;
+    public static ItemExcavateModifier itemExcavateModifier;
 
 
 
