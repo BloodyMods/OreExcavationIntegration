@@ -1,4 +1,4 @@
-package atm.bloodworkxgaming.oei;
+package atm.bloodworkxgaming.oeintegration;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;

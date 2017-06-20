@@ -1,6 +1,6 @@
-package atm.bloodworkxgaming.oei;
+package atm.bloodworkxgaming.oeintegration;
 
-import atm.bloodworkxgaming.oei.Common.Items.ItemExcavateModifier;
+import atm.bloodworkxgaming.oeintegration.Common.Items.ItemExcavateModifier;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

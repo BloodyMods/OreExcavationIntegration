@@ -1,4 +1,4 @@
-package atm.bloodworkxgaming.oei.Proxy;
+package atm.bloodworkxgaming.oeintegration.Proxy;
 
 
 public class ServerProxy extends CommonProxy {

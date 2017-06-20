@@ -1,7 +1,7 @@
 {
   "parent": "builtin/generated",
   "textures": {
-    "layer0": "oei:items/excavate"
+    "layer0": "oeintegration:items/excavate"
   },
   "display": {
     "thirdperson": {

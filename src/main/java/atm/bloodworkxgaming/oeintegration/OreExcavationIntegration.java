@@ -1,8 +1,8 @@
-package atm.bloodworkxgaming.oei;
+package atm.bloodworkxgaming.oeintegration;
 
-import atm.bloodworkxgaming.oei.Crafting.ModCrafting;
-import atm.bloodworkxgaming.oei.Integrations.TiC_Modifiers;
-import atm.bloodworkxgaming.oei.Proxy.CommonProxy;
+import atm.bloodworkxgaming.oeintegration.Crafting.ModCrafting;
+import atm.bloodworkxgaming.oeintegration.Integrations.TiC_Modifiers;
+import atm.bloodworkxgaming.oeintegration.Proxy.CommonProxy;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = OreExcavationIntegration.MOD_ID, name = OreExcavationIntegration.MOD_NAME, version = OreExcavationIntegration.VERSION, dependencies = OreExcavationIntegration.DEPENDENCIES)
 public class OreExcavationIntegration
 {
-    public static final String MOD_ID = "oei";
+    public static final String MOD_ID = "oeintegration";
     public static final String VERSION = "1.0";
     public static final String MOD_NAME = "OreExcavationIntegration";
     public static final String DEPENDENCIES = "after:oreexcavation";
@@ -26,7 +26,7 @@ public class OreExcavationIntegration
     public static OreExcavationIntegration instance;
 
 
-    @SidedProxy(clientSide = "atm.bloodworkxgaming.oei.Proxy.ClientProxy", serverSide = "atm.bloodworkxgaming.oei.Proxy.ServerProxy")
+    @SidedProxy(clientSide = "atm.bloodworkxgaming.oeintegration.Proxy.ClientProxy", serverSide = "atm.bloodworkxgaming.oeintegration.Proxy.ServerProxy")
     public static CommonProxy proxy;
 
     public static final Logger logger = LogManager.getLogger(MOD_ID);
@@ -44,7 +44,7 @@ public class OreExcavationIntegration
         }
 
         ModEnchantments.registerEnchantments();
-        MinecraftForge.EVENT_BUS.register(new atm.bloodworkxgaming.oei.Handler.EventHandler());
+        MinecraftForge.EVENT_BUS.register(new atm.bloodworkxgaming.oeintegration.Handler.EventHandler());
     }
 
 

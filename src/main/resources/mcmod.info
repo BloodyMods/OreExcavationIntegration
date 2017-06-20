@@ -1,6 +1,6 @@
 [
 {
-  "modid": "oei",
+  "modid": "oeintegration",
   "name": "OreExcavation Integration",
   "description": "Integrates OE into other mods.",
   "version": "${version}",
@@ -8,7 +8,7 @@
   "url": "",
   "updateUrl": "",
   "authorList": ["BloodWorkXGaming"],
-  "credits": "Funwayguy for making OreExcavation",
+  "credits": "thanks to Funwayguy for making OreExcavation",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

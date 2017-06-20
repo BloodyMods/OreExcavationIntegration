@@ -1,15 +1,10 @@
-package atm.bloodworkxgaming.oei;
+package atm.bloodworkxgaming.oeintegration;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
-import net.minecraftforge.fml.client.config.GuiConfigEntries;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Jonas on 09.05.2017.
@@ -18,7 +13,6 @@ import java.util.List;
 @Config(modid = OreExcavationIntegration.MOD_ID)
 public class MainConfig {
 
-
     @Config.Comment("A tool in this list won't require the enchantment")
     public static String[] toolWhitelistOverride = new String[]{
 
@@ -26,7 +20,7 @@ public class MainConfig {
 
     @Config.Comment("A tool in this list will be allowed to get the enchantment as well as any tool")
     public static String[] enchantmentWhitelist = new String[]{
-            "minecraft:shear"
+            "minecraft:shears"
     };
 
     @Config.Comment("This will take away the ability to enchant any item that is a tool")

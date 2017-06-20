@@ -1,9 +1,8 @@
-package atm.bloodworkxgaming.oei.Proxy;
+package atm.bloodworkxgaming.oeintegration.Proxy;
 
 
-import atm.bloodworkxgaming.oei.ModBlocks;
-import atm.bloodworkxgaming.oei.ModItems;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+import atm.bloodworkxgaming.oeintegration.ModBlocks;
+import atm.bloodworkxgaming.oeintegration.ModItems;
 
 public abstract class CommonProxy {
 

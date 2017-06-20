@@ -1,4 +1,4 @@
-package atm.bloodworkxgaming.oei;
+package atm.bloodworkxgaming.oeintegration;
 
 
 import net.minecraftforge.fml.relauncher.Side;

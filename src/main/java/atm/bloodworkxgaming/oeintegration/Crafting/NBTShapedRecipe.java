@@ -1,4 +1,4 @@
-package atm.bloodworkxgaming.oei.Crafting;
+package atm.bloodworkxgaming.oeintegration.Crafting;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;

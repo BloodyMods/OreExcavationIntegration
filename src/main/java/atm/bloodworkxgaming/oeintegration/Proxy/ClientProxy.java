@@ -1,8 +1,8 @@
-package atm.bloodworkxgaming.oei.Proxy;
+package atm.bloodworkxgaming.oeintegration.Proxy;
 
 
-import atm.bloodworkxgaming.oei.ModBlocks;
-import atm.bloodworkxgaming.oei.ModItems;
+import atm.bloodworkxgaming.oeintegration.ModBlocks;
+import atm.bloodworkxgaming.oeintegration.ModItems;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

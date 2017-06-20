@@ -1,7 +1,7 @@
-package atm.bloodworkxgaming.oei.Crafting;
+package atm.bloodworkxgaming.oeintegration.Crafting;
 
-import atm.bloodworkxgaming.oei.ModEnchantments;
-import atm.bloodworkxgaming.oei.ModItems;
+import atm.bloodworkxgaming.oeintegration.ModItems;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -21,9 +21,6 @@ public class ModCrafting {
     public final static Item tinkersMaterials = null;
 
     public static void initCrafting(){
-
-
-            System.out.println("TiCon is loaded");
             ticCrafting();
     }
 
@@ -40,7 +37,7 @@ public class ModCrafting {
 
             // exchange recipe between book and modifier
             ItemStack magicBook = new ItemStack(Items.ENCHANTED_BOOK);
-            Items.ENCHANTED_BOOK.addEnchantment(magicBook, new EnchantmentData(ModEnchantments.excavationEnchantment, 1));
+            Items.ENCHANTED_BOOK.addEnchantment(magicBook, new EnchantmentData(Enchantment.getEnchantmentByLocation("oeintegration:oreexcavation"), 1));
 
             GameRegistry.addRecipe(new NBTShapedRecipe(1, 1, new ItemStack[]{new ItemStack(ModItems.itemExcavateModifier)}, magicBook));
             GameRegistry.addRecipe(new NBTShapedRecipe(1, 1, new ItemStack[]{magicBook}, new ItemStack(ModItems.itemExcavateModifier)));
