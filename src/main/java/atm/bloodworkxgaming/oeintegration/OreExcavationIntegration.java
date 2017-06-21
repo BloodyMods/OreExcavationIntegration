@@ -60,6 +60,7 @@ public class OreExcavationIntegration
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
+
         proxy.postInit();
     }
 

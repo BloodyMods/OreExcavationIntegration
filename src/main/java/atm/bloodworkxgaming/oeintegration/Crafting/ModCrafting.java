@@ -1,5 +1,6 @@
 package atm.bloodworkxgaming.oeintegration.Crafting;
 
+import atm.bloodworkxgaming.oeintegration.ModEnchantments;
 import atm.bloodworkxgaming.oeintegration.ModItems;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
@@ -36,11 +37,15 @@ public class ModCrafting {
 
 
             // exchange recipe between book and modifier
-            ItemStack magicBook = new ItemStack(Items.ENCHANTED_BOOK);
-            Items.ENCHANTED_BOOK.addEnchantment(magicBook, new EnchantmentData(Enchantment.getEnchantmentByLocation("oeintegration:oreexcavation"), 1));
+            GameRegistry.addRecipe(new NBTShapedRecipe(1, 1, new ItemStack[]{new ItemStack(ModItems.itemExcavateModifier)}, new ItemStack(Items.ENCHANTED_BOOK)){
+                @Override
+                public ItemStack getRecipeOutput() {
+                    ItemStack magicBook = new ItemStack(Items.ENCHANTED_BOOK);
+                    Items.ENCHANTED_BOOK.addEnchantment(magicBook, new EnchantmentData(ModEnchantments.excavationEnchantment, 1));
+                    return magicBook;
+                }
+            });
 
-            GameRegistry.addRecipe(new NBTShapedRecipe(1, 1, new ItemStack[]{new ItemStack(ModItems.itemExcavateModifier)}, magicBook));
-            GameRegistry.addRecipe(new NBTShapedRecipe(1, 1, new ItemStack[]{magicBook}, new ItemStack(ModItems.itemExcavateModifier)));
         }
     }
 

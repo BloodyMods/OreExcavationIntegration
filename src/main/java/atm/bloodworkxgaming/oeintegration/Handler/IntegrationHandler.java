@@ -1,6 +1,7 @@
 package atm.bloodworkxgaming.oeintegration.Handler;
 
 import atm.bloodworkxgaming.oeintegration.MainConfig;
+import atm.bloodworkxgaming.oeintegration.ModEnchantments;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -26,7 +27,7 @@ public class IntegrationHandler {
         }
 
         if (held.isItemEnchanted()) {
-            if (EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByLocation("oeintegration:oreexcavation"), held) > 0){
+            if (EnchantmentHelper.getEnchantmentLevel(ModEnchantments.excavationEnchantment, held) > 0){
                 return true;
             }
         }
