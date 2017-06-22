@@ -2,6 +2,7 @@ package atm.bloodworkxgaming.oeintegration;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.ArrayUtils;
@@ -48,5 +49,14 @@ public class ExcavationEnchantment extends Enchantment {
     public boolean canApply(ItemStack stack) {
         return ( super.canApply(stack) && !(stack.getItem().getRegistryName() != null && ArrayUtils.contains(MainConfig.enchantmentBlacklist, stack.getItem().getRegistryName().toString())))
                 || (stack.getItem().getRegistryName() != null && ArrayUtils.contains(MainConfig.enchantmentWhitelist, stack.getItem().getRegistryName().toString()));
+    }
+
+    @Override
+    protected boolean canApplyTogether(Enchantment ench) {
+        if (MainConfig.allowMendingEnchantment){
+            return super.canApplyTogether(ench);
+        } else {
+            return super.canApplyTogether(ench) && ench != Enchantments.MENDING;
+        }
     }
 }

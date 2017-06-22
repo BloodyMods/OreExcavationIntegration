@@ -28,6 +28,15 @@ public class MainConfig {
 
     };
 
+    @Config.Comment("true allows Mending and Excavate to be on the same Tool with Enchantments")
+    public static boolean allowMendingEnchantment = true;
+
+    @Config.Comment("true allows Mending and Excavate to be on the same Tool with Tinkers")
+    public static boolean allowMendingTinkers = true;
+
+    @Config.Comment("Tinkers Microcrafting: blocks[false] or ToolParts[true]")
+    public static boolean ticMicrocrafting = true;
+
 
 
     @Mod.EventBusSubscriber

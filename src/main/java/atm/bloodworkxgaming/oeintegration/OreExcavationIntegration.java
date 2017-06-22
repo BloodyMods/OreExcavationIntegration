@@ -1,6 +1,7 @@
 package atm.bloodworkxgaming.oeintegration;
 
 import atm.bloodworkxgaming.oeintegration.Crafting.ModCrafting;
+import atm.bloodworkxgaming.oeintegration.Crafting.NBTShapedRecipe;
 import atm.bloodworkxgaming.oeintegration.Integrations.TiC_Modifiers;
 import atm.bloodworkxgaming.oeintegration.Proxy.CommonProxy;
 import net.minecraftforge.common.MinecraftForge;
@@ -11,6 +12,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.oredict.RecipeSorter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,7 +20,7 @@ import org.apache.logging.log4j.Logger;
 public class OreExcavationIntegration
 {
     public static final String MOD_ID = "oeintegration";
-    public static final String VERSION = "1.0";
+    public static final String VERSION = "1.2";
     public static final String MOD_NAME = "OreExcavationIntegration";
     public static final String DEPENDENCIES = "after:oreexcavation";
 
