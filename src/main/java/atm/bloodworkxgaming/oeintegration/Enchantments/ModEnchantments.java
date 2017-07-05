@@ -1,4 +1,4 @@
-package atm.bloodworkxgaming.oeintegration;
+package atm.bloodworkxgaming.oeintegration.Enchantments;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.ResourceLocation;

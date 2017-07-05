@@ -1,5 +1,6 @@
-package atm.bloodworkxgaming.oeintegration;
+package atm.bloodworkxgaming.oeintegration.Enchantments;
 
+import atm.bloodworkxgaming.oeintegration.MainConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.init.Enchantments;
@@ -42,7 +43,7 @@ public class ExcavationEnchantment extends Enchantment {
     @Override
     public int getMaxLevel()
     {
-        return 1;
+        return 5;
     }
 
     @Override
@@ -58,5 +59,10 @@ public class ExcavationEnchantment extends Enchantment {
         } else {
             return super.canApplyTogether(ench) && ench != Enchantments.MENDING;
         }
+    }
+
+    @Override
+    public boolean isTreasureEnchantment() {
+        return true;
     }
 }

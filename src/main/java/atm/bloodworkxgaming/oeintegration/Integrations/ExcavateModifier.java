@@ -5,6 +5,7 @@ import atm.bloodworkxgaming.oeintegration.ModItems;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Enchantments;
 import net.minecraft.nbt.NBTTagCompound;
+import slimeknights.tconstruct.library.modifiers.IModifier;
 import slimeknights.tconstruct.library.modifiers.IToolMod;
 import slimeknights.tconstruct.library.modifiers.Modifier;
 import slimeknights.tconstruct.library.modifiers.ModifierAspect;
@@ -18,10 +19,15 @@ import slimeknights.tconstruct.tools.modifiers.ToolModifier;
  */
 public class ExcavateModifier extends ToolModifier {
 
+
+    public static final int baseCount = 25;
+
     public ExcavateModifier() {
         super("oreexcavate", 0xCC6600);
+
+
         this.addAspects(ModifierAspect.toolOnly,
-                new ModifierAspect.SingleAspect(this), new ModifierAspect.DataAspect(this), ModifierAspect.freeModifier);
+                new ModifierAspect.MultiAspect(this, 1, baseCount, 1));
 
         this.addItem(ModItems.itemExcavateModifier, 1, 1);
 
@@ -41,4 +47,12 @@ public class ExcavateModifier extends ToolModifier {
     public void applyEffect(NBTTagCompound nbtTagCompound, NBTTagCompound nbtTagCompound1) {
         // no extra data needed
     }
+
+    @Override
+    public String getTooltip(NBTTagCompound modifierTag, boolean detailed) {
+        return getLeveledTooltip(modifierTag, detailed);
+    }
 }
+
+
+

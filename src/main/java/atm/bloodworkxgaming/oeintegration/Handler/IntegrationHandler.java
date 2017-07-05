@@ -1,51 +1,94 @@
 package atm.bloodworkxgaming.oeintegration.Handler;
 
 import atm.bloodworkxgaming.oeintegration.MainConfig;
-import atm.bloodworkxgaming.oeintegration.ModEnchantments;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.enchantment.Enchantment;
+import atm.bloodworkxgaming.oeintegration.Enchantments.ModEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Loader;
+import oreexcavation.handlers.MiningAgent;
+import oreexcavation.overrides.ToolOverride;
 import org.apache.commons.lang3.ArrayUtils;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 import slimeknights.tconstruct.library.utils.ToolHelper;
+
+import static net.minecraft.enchantment.EnchantmentHelper.getEnchantmentLevel;
 
 /**
  * Created by jonas on 18.06.2017.
  */
 public class IntegrationHandler {
 
-    public static boolean checkCanMine(World world, EntityPlayerMP player, BlockPos pos, IBlockState state){
-        ItemStack held = player.getHeldItemMainhand();
+    public static final int RangeModifer = 1;
+    public static final int LimitModifier = 10;
 
-        if (held.getItem().getRegistryName() != null && ArrayUtils.contains(MainConfig.toolWhitelistOverride, held.getItem().getRegistryName().toString())){
-            return true;
+
+    public static IntegrationType checkCanMine(ItemStack usedItem){
+
+        if (usedItem.getItem().getRegistryName() != null && ArrayUtils.contains(MainConfig.toolWhitelistOverride, usedItem.getItem().getRegistryName().toString())){
+            return IntegrationType.WHITELIST;
         }
 
-        if (held.isItemEnchanted()) {
-            if (EnchantmentHelper.getEnchantmentLevel(ModEnchantments.excavationEnchantment, held) > 0){
-                return true;
+        if (usedItem.isItemEnchanted()) {
+            if (getEnchantmentLevel(ModEnchantments.excavationEnchantment, usedItem) > 0){
+                return IntegrationType.ENCHANTMENT;
             }
         }
 
-
-
-        if (Loader.isModLoaded("tconstruct") && held.hasTagCompound() && TinkerUtil.hasModifier(held.getTagCompound(), "oreexcavate")){
-            return !ToolHelper.isBroken(held);
+        if (Loader.isModLoaded("tconstruct") && usedItem.hasTagCompound() && TinkerUtil.hasModifier(usedItem.getTagCompound(), "oreexcavate")){
+            if (!ToolHelper.isBroken(usedItem)){
+                return IntegrationType.TINKERS_CONSTRUCT;
+            }
         }
 
-
-
-        /*if (player.getHeldItemMainhand().getItem() == Items.APPLE || player.getHeldItemMainhand().getItem() == Items.DIAMOND_PICKAXE){
-            return true;
-        }*/
-
-        return false;
+        return IntegrationType.DISALLOWED;
     }
 
+    public static void changeToolOverwriteEnchantment(MiningAgent agent){
+        ItemStack held = agent.player.getHeldItemMainhand();
+
+        // enchantment data
+        int enchantmentLevel = getEnchantmentLevel(ModEnchantments.excavationEnchantment, held);
+        int maxLevel = ModEnchantments.excavationEnchantment.getMaxLevel();
+
+
+
+        // gets a new toolOverwrite
+        ToolOverride toolProps = ToolOverride.readFromString("*");
+
+        float modifier = ((float)enchantmentLevel / (float)maxLevel);
+
+        // System.out.println("limit: " + (int)(ToolOverride.DEFAULT.getLimit() * modifier) );
+
+        toolProps.setRange((int)(ToolOverride.DEFAULT.getRange() * modifier)+ RangeModifer );
+        toolProps.setLimit((int)(ToolOverride.DEFAULT.getLimit() * modifier)+ LimitModifier);
+
+         agent.toolProps = toolProps;
+    }
+
+
+    public static void changeToolOverwriteTinkers(MiningAgent agent){
+        ItemStack held = agent.player.getHeldItemMainhand();
+
+        NBTTagCompound modifier = TinkerUtil.getModifierTag(held, "oreexcavate");
+        // System.out.println(modifier);
+
+        int enchantmentLevel = modifier.getInteger("current");
+        int maxLevel = modifier.getInteger("max");
+
+
+        // gets a new toolOverwrite
+        ToolOverride toolProps = ToolOverride.readFromString("*");
+
+        float modifierModifier = ((float)enchantmentLevel / (float)maxLevel);
+
+        toolProps.setRange((int)Math.ceil(ToolOverride.DEFAULT.getRange() * modifierModifier) + RangeModifer );
+        toolProps.setLimit((int)Math.ceil(ToolOverride.DEFAULT.getLimit() * modifierModifier) + LimitModifier);
+
+        // System.out.println("limit: " + (toolProps.getLimit()) );
+        // System.out.println("range: " + (toolProps.getRange()) );
+
+        agent.toolProps = toolProps;
+    }
 
 }

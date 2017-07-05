@@ -1,30 +1,20 @@
 package atm.bloodworkxgaming.oeintegration.Crafting;
 
-import atm.bloodworkxgaming.oeintegration.MainConfig;
-import atm.bloodworkxgaming.oeintegration.ModEnchantments;
 import atm.bloodworkxgaming.oeintegration.ModItems;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 /**
  * Created by jonas on 19.06.2017.
  */
 public class ModCrafting {
 
-
-    @ObjectHolder("tconstruct:materials")
-    public final static Item tinkersMaterials = null;
-
-    @ObjectHolder("tconstruct:metal")
-    public final static Item metalBlock = null;
+    @ObjectHolder("tconstruct:ingots")
+    public final static Item ingots = null;
 
 
     public static void initCrafting(){
@@ -35,49 +25,12 @@ public class ModCrafting {
     public static void ticCrafting(){
         if (Loader.isModLoaded("tconstruct")) {
 
-            if (MainConfig.ticMicrocrafting){
-                GameRegistry.addRecipe(new NBTShapedRecipe(3, 3, new ItemStack[]{
-                        new ItemStack(tinkersMaterials, 1, 12), getTinkersPart("broad_axe_head", "manyullyn"), new ItemStack(tinkersMaterials, 1, 12),
-                        getTinkersPart("excavator_head", "prismarine"), getTinkersPart("tough_binding", "knightslime"), getTinkersPart("hammer_head", "pigiron"),
-                        new ItemStack(tinkersMaterials, 1, 13), getTinkersPart("tough_tool_rod", "endstone"), new ItemStack(tinkersMaterials, 1, 13)
-                }, new ItemStack(ModItems.itemExcavateModifier)));
-            }else {
-                
-                GameRegistry.addRecipe(new NBTShapedRecipe(3, 3, new ItemStack[]{
-                        new ItemStack(tinkersMaterials, 1, 12), new ItemStack(metalBlock, 1, 2), new ItemStack(tinkersMaterials, 1, 12),
-                        new ItemStack(Blocks.PRISMARINE, 1, 0), new ItemStack(metalBlock, 1, 3), new ItemStack(metalBlock, 1, 4),
-                        new ItemStack(tinkersMaterials, 1, 13), new ItemStack(Blocks.END_STONE, 1, 0), new ItemStack(tinkersMaterials, 1, 13)
-                }, new ItemStack(ModItems.itemExcavateModifier)));
-            }
-
-
-            // exchange recipe between book and modifier
-            GameRegistry.addRecipe(new NBTShapedRecipe(1, 1, new ItemStack[]{new ItemStack(ModItems.itemExcavateModifier)}, new ItemStack(Items.ENCHANTED_BOOK)){
-                @Override
-                public ItemStack getRecipeOutput() {
-                    ItemStack magicBook = new ItemStack(Items.ENCHANTED_BOOK);
-                    Items.ENCHANTED_BOOK.addEnchantment(magicBook, new EnchantmentData(ModEnchantments.excavationEnchantment, 1));
-                    return magicBook;
-                }
-            });
-
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.itemExcavateModifier),
+                    new Object[]{"ASA",
+                                 "RMR",
+                                 "ASA",
+                    'S', "slimeball", 'M', new ItemStack(ingots, 1, 2), 'R', "dustRedstone", 'A', "ingotIron"}
+            ));
         }
     }
-
-
-    public static ItemStack getTinkersPart(String itemName, String material){
-
-        Item item = Item.getByNameOrId("tconstruct:" + itemName);
-        if (item != null){
-            ItemStack itemStack = new ItemStack(item);
-            NBTTagCompound nbt = new NBTTagCompound();
-            nbt.setString("Material", material);
-            itemStack.setTagCompound(nbt);
-
-            return itemStack;
-        }
-
-        return ItemStack.EMPTY;
-    }
-
 }
