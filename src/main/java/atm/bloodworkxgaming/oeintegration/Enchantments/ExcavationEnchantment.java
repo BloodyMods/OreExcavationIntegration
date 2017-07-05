@@ -53,7 +53,7 @@ public class ExcavationEnchantment extends Enchantment {
     }
 
     @Override
-    protected boolean canApplyTogether(Enchantment ench) {
+    public boolean canApplyTogether(Enchantment ench) {
         if (MainConfig.allowMendingEnchantment){
             return super.canApplyTogether(ench);
         } else {
