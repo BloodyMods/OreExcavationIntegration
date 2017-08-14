@@ -17,14 +17,14 @@ public class ExcavationEnchantment extends Enchantment {
     protected ExcavationEnchantment() {
         super(Rarity.VERY_RARE, EnumEnchantmentType.DIGGER, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
         this.setName("oreexcavation");
+        this.setRegistryName("oreexcavation");
     }
 
     /**
      * Returns the minimal value of enchantability needed on the enchantment level passed.
      */
     @Override
-    public int getMinEnchantability(int enchantmentLevel)
-    {
+    public int getMinEnchantability(int enchantmentLevel) {
         return 20;
     }
 
@@ -32,8 +32,7 @@ public class ExcavationEnchantment extends Enchantment {
      * Returns the maximum value of enchantability nedded on the enchantment level passed.
      */
     @Override
-    public int getMaxEnchantability(int enchantmentLevel)
-    {
+    public int getMaxEnchantability(int enchantmentLevel) {
         return 50;
     }
 
@@ -41,20 +40,19 @@ public class ExcavationEnchantment extends Enchantment {
      * Returns the maximum level that the enchantment can have.
      */
     @Override
-    public int getMaxLevel()
-    {
+    public int getMaxLevel() {
         return 5;
     }
 
     @Override
     public boolean canApply(ItemStack stack) {
-        return ( super.canApply(stack) && !(stack.getItem().getRegistryName() != null && ArrayUtils.contains(MainConfig.enchantmentBlacklist, stack.getItem().getRegistryName().toString())))
+        return (super.canApply(stack) && !(stack.getItem().getRegistryName() != null && ArrayUtils.contains(MainConfig.enchantmentBlacklist, stack.getItem().getRegistryName().toString())))
                 || (stack.getItem().getRegistryName() != null && ArrayUtils.contains(MainConfig.enchantmentWhitelist, stack.getItem().getRegistryName().toString()));
     }
 
     @Override
     protected boolean canApplyTogether(Enchantment ench) {
-        if (MainConfig.allowMendingEnchantment){
+        if (MainConfig.allowMendingEnchantment) {
             return super.canApplyTogether(ench);
         } else {
             return super.canApplyTogether(ench) && ench != Enchantments.MENDING;

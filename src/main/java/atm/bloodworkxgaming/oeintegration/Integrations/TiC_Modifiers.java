@@ -10,7 +10,7 @@ public class TiC_Modifiers {
     public static Modifier excavateModifier;
 
 
-    public static void register(){
+    public static void register() {
         excavateModifier = new ExcavateModifier();
 
     }

@@ -17,7 +17,7 @@ public class EventHandler {
 
         ItemStack held = agent.player.getHeldItemMainhand();
 
-        switch (IntegrationHandler.checkCanMine(held)){
+        switch (IntegrationHandler.checkCanMine(held)) {
             case WHITELIST:
                 break;
             case ENCHANTMENT:

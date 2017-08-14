@@ -38,12 +38,11 @@ public class MainConfig {
     public static boolean ticMicrocrafting = true;
 
 
-
     @Mod.EventBusSubscriber
     static class ConfigurationHolder {
         @SubscribeEvent
-        public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event){
-            if (event.getModID().equals(OreExcavationIntegration.MOD_ID)){
+        public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+            if (event.getModID().equals(OreExcavationIntegration.MOD_ID)) {
                 ConfigManager.load(OreExcavationIntegration.MOD_ID, Config.Type.INSTANCE);
             }
         }

@@ -1,8 +1,7 @@
 package atm.bloodworkxgaming.oeintegration.Handler;
 
-import atm.bloodworkxgaming.oeintegration.MainConfig;
 import atm.bloodworkxgaming.oeintegration.Enchantments.ModEnchantments;
-import net.minecraft.enchantment.EnchantmentHelper;
+import atm.bloodworkxgaming.oeintegration.MainConfig;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Loader;
@@ -23,20 +22,20 @@ public class IntegrationHandler {
     public static final int LimitModifier = 10;
 
 
-    public static IntegrationType checkCanMine(ItemStack usedItem){
+    public static IntegrationType checkCanMine(ItemStack usedItem) {
 
-        if (usedItem.getItem().getRegistryName() != null && ArrayUtils.contains(MainConfig.toolWhitelistOverride, usedItem.getItem().getRegistryName().toString())){
+        if (usedItem.getItem().getRegistryName() != null && ArrayUtils.contains(MainConfig.toolWhitelistOverride, usedItem.getItem().getRegistryName().toString())) {
             return IntegrationType.WHITELIST;
         }
 
         if (usedItem.isItemEnchanted()) {
-            if (getEnchantmentLevel(ModEnchantments.excavationEnchantment, usedItem) > 0){
+            if (getEnchantmentLevel(ModEnchantments.excavationEnchantment, usedItem) > 0) {
                 return IntegrationType.ENCHANTMENT;
             }
         }
 
-        if (Loader.isModLoaded("tconstruct") && usedItem.hasTagCompound() && TinkerUtil.hasModifier(usedItem.getTagCompound(), "oreexcavate")){
-            if (!ToolHelper.isBroken(usedItem)){
+        if (Loader.isModLoaded("tconstruct") && usedItem.hasTagCompound() && TinkerUtil.hasModifier(usedItem.getTagCompound(), "oreexcavate")) {
+            if (!ToolHelper.isBroken(usedItem)) {
                 return IntegrationType.TINKERS_CONSTRUCT;
             }
         }
@@ -44,7 +43,7 @@ public class IntegrationHandler {
         return IntegrationType.DISALLOWED;
     }
 
-    public static void changeToolOverwriteEnchantment(MiningAgent agent){
+    public static void changeToolOverwriteEnchantment(MiningAgent agent) {
         ItemStack held = agent.player.getHeldItemMainhand();
 
         // enchantment data
@@ -52,22 +51,21 @@ public class IntegrationHandler {
         int maxLevel = ModEnchantments.excavationEnchantment.getMaxLevel();
 
 
-
         // gets a new toolOverwrite
         ToolOverride toolProps = ToolOverride.readFromString("*");
 
-        float modifier = ((float)enchantmentLevel / (float)maxLevel);
+        float modifier = ((float) enchantmentLevel / (float) maxLevel);
 
         // System.out.println("limit: " + (int)(ToolOverride.DEFAULT.getLimit() * modifier) );
 
-        toolProps.setRange((int)(ToolOverride.DEFAULT.getRange() * modifier)+ RangeModifer );
-        toolProps.setLimit((int)(ToolOverride.DEFAULT.getLimit() * modifier)+ LimitModifier);
+        toolProps.setRange((int) (ToolOverride.DEFAULT.getRange() * modifier) + RangeModifer);
+        toolProps.setLimit((int) (ToolOverride.DEFAULT.getLimit() * modifier) + LimitModifier);
 
-         agent.toolProps = toolProps;
+        agent.toolProps = toolProps;
     }
 
 
-    public static void changeToolOverwriteTinkers(MiningAgent agent){
+    public static void changeToolOverwriteTinkers(MiningAgent agent) {
         ItemStack held = agent.player.getHeldItemMainhand();
 
         NBTTagCompound modifier = TinkerUtil.getModifierTag(held, "oreexcavate");
@@ -80,10 +78,10 @@ public class IntegrationHandler {
         // gets a new toolOverwrite
         ToolOverride toolProps = ToolOverride.readFromString("*");
 
-        float modifierModifier = ((float)enchantmentLevel / (float)maxLevel);
+        float modifierModifier = ((float) enchantmentLevel / (float) maxLevel);
 
-        toolProps.setRange((int)Math.ceil(ToolOverride.DEFAULT.getRange() * modifierModifier) + RangeModifer );
-        toolProps.setLimit((int)Math.ceil(ToolOverride.DEFAULT.getLimit() * modifierModifier) + LimitModifier);
+        toolProps.setRange((int) Math.ceil(ToolOverride.DEFAULT.getRange() * modifierModifier) + RangeModifer);
+        toolProps.setLimit((int) Math.ceil(ToolOverride.DEFAULT.getLimit() * modifierModifier) + LimitModifier);
 
         // System.out.println("limit: " + (toolProps.getLimit()) );
         // System.out.println("range: " + (toolProps.getRange()) );
