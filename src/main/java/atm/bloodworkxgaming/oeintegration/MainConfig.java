@@ -13,6 +13,18 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Config(modid = OreExcavationIntegration.MOD_ID)
 public class MainConfig {
 
+    @Config.Comment({"Setting this config to true will fully disable the mod and you can use OreExcavation normally.",
+            "This is better than ripping out the JAR from the mods folder"})
+    public static boolean disableMod = false;
+
+    @Config.Comment("Setting this to true toggels the whitelist to a blacklist")
+    public static boolean packModesWhitelistToBlacklistToggle = false;
+
+    @Config.Comment("If the current packmode is in this list then you will be able to mine without the modifier")
+    public static String[] packModesWhitelist = new String[]{
+
+    };
+
     @Config.Comment("A tool in this list won't require the enchantment")
     public static String[] toolWhitelistOverride = new String[]{
 
@@ -49,5 +61,3 @@ public class MainConfig {
 
     }
 }
-
-// <https://github.com/Choonster-Minecraft-Mods/TestMod3/blob/b3d71dfddf7f212f0d86ef36e6ae1d06b8493ebc/src/main/java/choonster/testmod3/config/ModConfig.java>

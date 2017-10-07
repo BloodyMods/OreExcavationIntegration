@@ -1,6 +1,7 @@
 package atm.bloodworkxgaming.oeintegration.Handler;
 
 import atm.bloodworkxgaming.oeintegration.Enchantments.ModEnchantments;
+import atm.bloodworkxgaming.oeintegration.Integrations.PackModesIntegration;
 import atm.bloodworkxgaming.oeintegration.MainConfig;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,6 +24,11 @@ public class IntegrationHandler {
 
 
     public static IntegrationType checkCanMine(ItemStack usedItem) {
+        if (MainConfig.disableMod) return IntegrationType.MOD_DISABLED;
+
+        if (Loader.isModLoaded("packmode")){
+            if (PackModesIntegration.checkIsCorrectPackmode()) return IntegrationType.WHITELISTED_PACKMODE;
+        }
 
         if (usedItem.getItem().getRegistryName() != null && ArrayUtils.contains(MainConfig.toolWhitelistOverride, usedItem.getItem().getRegistryName().toString())) {
             return IntegrationType.WHITELIST;

@@ -12,13 +12,14 @@ import oreexcavation.handlers.MiningAgent;
 public class EventHandler {
     @SubscribeEvent
     public void onExcavateEvent(EventExcavate.Pre eventExcavate) {
-
         MiningAgent agent = eventExcavate.getAgent();
 
         ItemStack held = agent.player.getHeldItemMainhand();
 
         switch (IntegrationHandler.checkCanMine(held)) {
             case WHITELIST:
+            case MOD_DISABLED:
+            case WHITELISTED_PACKMODE:
                 break;
             case ENCHANTMENT:
                 IntegrationHandler.changeToolOverwriteEnchantment(agent);
