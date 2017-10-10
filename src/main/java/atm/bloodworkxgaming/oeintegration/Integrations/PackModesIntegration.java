@@ -1,11 +1,11 @@
 package atm.bloodworkxgaming.oeintegration.Integrations;
 
 import atm.bloodworkxgaming.oeintegration.MainConfig;
-import io.sommers.packmode.PMConfig;
+import io.sommers.packmode.api.PackModeAPI;
 
 public class PackModesIntegration {
     public static boolean checkIsCorrectPackmode(){
-        String currentMode = PMConfig.packMode;
+        String currentMode = PackModeAPI.getInstance().getCurrentPackMode();
         if (currentMode == null) return false;
 
 
