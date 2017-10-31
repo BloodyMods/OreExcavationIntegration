@@ -6,6 +6,7 @@ import atm.bloodworkxgaming.oeintegration.MainConfig;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Loader;
+import oreexcavation.core.ExcavationSettings;
 import oreexcavation.handlers.MiningAgent;
 import oreexcavation.overrides.ToolOverride;
 import org.apache.commons.lang3.ArrayUtils;
@@ -21,7 +22,6 @@ public class IntegrationHandler {
 
     public static final int RangeModifer = 1;
     public static final int LimitModifier = 10;
-
 
     public static IntegrationType checkCanMine(ItemStack usedItem) {
         if (MainConfig.disableMod) return IntegrationType.MOD_DISABLED;
@@ -62,10 +62,8 @@ public class IntegrationHandler {
 
         float modifier = ((float) enchantmentLevel / (float) maxLevel);
 
-        // System.out.println("limit: " + (int)(ToolOverride.DEFAULT.getLimit() * modifier) );
-
-        toolProps.setRange((int) (ToolOverride.DEFAULT.getRange() * modifier) + RangeModifer);
-        toolProps.setLimit((int) (ToolOverride.DEFAULT.getLimit() * modifier) + LimitModifier);
+        toolProps.setRange((int) (ExcavationSettings.mineRange * modifier) + RangeModifer);
+        toolProps.setLimit((int) (ExcavationSettings.mineLimit * modifier) + LimitModifier);
 
         agent.toolProps = toolProps;
     }
@@ -75,7 +73,6 @@ public class IntegrationHandler {
         ItemStack held = agent.player.getHeldItemMainhand();
 
         NBTTagCompound modifier = TinkerUtil.getModifierTag(held, "oreexcavate");
-        // System.out.println(modifier);
 
         int enchantmentLevel = modifier.getInteger("current");
         int maxLevel = modifier.getInteger("max");
@@ -86,11 +83,8 @@ public class IntegrationHandler {
 
         float modifierModifier = ((float) enchantmentLevel / (float) maxLevel);
 
-        toolProps.setRange((int) Math.ceil(ToolOverride.DEFAULT.getRange() * modifierModifier) + RangeModifer);
-        toolProps.setLimit((int) Math.ceil(ToolOverride.DEFAULT.getLimit() * modifierModifier) + LimitModifier);
-
-        // System.out.println("limit: " + (toolProps.getLimit()) );
-        // System.out.println("range: " + (toolProps.getRange()) );
+        toolProps.setRange((int) Math.ceil(ExcavationSettings.mineRange * modifierModifier) + RangeModifer);
+        toolProps.setLimit((int) Math.ceil(ExcavationSettings.mineLimit * modifierModifier) + LimitModifier);
 
         agent.toolProps = toolProps;
     }

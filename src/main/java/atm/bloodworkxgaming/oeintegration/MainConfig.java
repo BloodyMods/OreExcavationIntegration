@@ -17,6 +17,9 @@ public class MainConfig {
             "This is better than ripping out the JAR from the mods folder"})
     public static boolean disableMod = false;
 
+    @Config.Comment("This will disable the chat notification for all Players on the server")
+    public static boolean disableChatNotification = false;
+
     @Config.Comment("Setting this to true toggels the whitelist to a blacklist")
     public static boolean packModesWhitelistToBlacklistToggle = false;
 
@@ -45,10 +48,6 @@ public class MainConfig {
 
     @Config.Comment("true allows Mending and Excavate to be on the same Tool with Tinkers")
     public static boolean allowMendingTinkers = true;
-
-    @Config.Comment("Tinkers Microcrafting: blocks[false] or ToolParts[true]")
-    public static boolean ticMicrocrafting = true;
-
 
     @Mod.EventBusSubscriber
     static class ConfigurationHolder {

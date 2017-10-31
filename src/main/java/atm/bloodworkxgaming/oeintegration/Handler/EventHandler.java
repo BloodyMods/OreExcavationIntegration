@@ -1,5 +1,6 @@
 package atm.bloodworkxgaming.oeintegration.Handler;
 
+import atm.bloodworkxgaming.oeintegration.MainConfig;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -30,7 +31,9 @@ public class EventHandler {
             case DISALLOWED:
             default:
                 eventExcavate.setCanceled(true);
-                agent.player.sendMessage(new TextComponentString("You need the \u00A7eExcavate Modifier \u00A7ror the \u00A76Enchantment \u00A7ron your tool to be able to excavate!"));
+                if (!MainConfig.disableChatNotification){
+                    agent.player.sendMessage(new TextComponentString("You need the \u00A7eExcavate Modifier \u00A7ror the \u00A76Enchantment \u00A7ron your tool to be able to excavate!"));
+                }
                 break;
 
         }
