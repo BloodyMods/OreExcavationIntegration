@@ -6,6 +6,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Loader;
+import oreexcavation.core.ExcavationSettings;
 import oreexcavation.handlers.MiningAgent;
 import oreexcavation.overrides.ToolOverride;
 import org.apache.commons.lang3.ArrayUtils;
@@ -24,6 +25,7 @@ public class IntegrationHandler {
 
 
     public static IntegrationType checkCanMine(ItemStack usedItem){
+        if (MainConfig.disableMod) return IntegrationType.MOD_DISABLED;
 
         if (usedItem.getItem().getRegistryName() != null && ArrayUtils.contains(MainConfig.toolWhitelistOverride, usedItem.getItem().getRegistryName().toString())){
             return IntegrationType.WHITELIST;
@@ -60,8 +62,8 @@ public class IntegrationHandler {
 
         // System.out.println("limit: " + (int)(ToolOverride.DEFAULT.getLimit() * modifier) );
 
-        toolProps.setRange((int)(ToolOverride.DEFAULT.getRange() * modifier)+ RangeModifer );
-        toolProps.setLimit((int)(ToolOverride.DEFAULT.getLimit() * modifier)+ LimitModifier);
+        toolProps.setRange((int) (ExcavationSettings.mineRange * modifier) + RangeModifer);
+        toolProps.setLimit((int) (ExcavationSettings.mineLimit * modifier) + LimitModifier);
 
          agent.toolProps = toolProps;
     }
@@ -82,8 +84,8 @@ public class IntegrationHandler {
 
         float modifierModifier = ((float)enchantmentLevel / (float)maxLevel);
 
-        toolProps.setRange((int)Math.ceil(ToolOverride.DEFAULT.getRange() * modifierModifier) + RangeModifer );
-        toolProps.setLimit((int)Math.ceil(ToolOverride.DEFAULT.getLimit() * modifierModifier) + LimitModifier);
+        toolProps.setRange((int) Math.ceil(ExcavationSettings.mineRange * modifierModifier) + RangeModifer);
+        toolProps.setLimit((int) Math.ceil(ExcavationSettings.mineLimit * modifierModifier) + LimitModifier);
 
         // System.out.println("limit: " + (toolProps.getLimit()) );
         // System.out.println("range: " + (toolProps.getRange()) );

@@ -7,5 +7,6 @@ public enum IntegrationType {
     TINKERS_CONSTRUCT,
     ENCHANTMENT,
     WHITELIST,
+    MOD_DISABLED,
     DISALLOWED
 }

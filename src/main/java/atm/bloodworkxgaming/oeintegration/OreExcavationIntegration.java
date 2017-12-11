@@ -4,6 +4,7 @@ import atm.bloodworkxgaming.oeintegration.Crafting.ModCrafting;
 import atm.bloodworkxgaming.oeintegration.Enchantments.ModEnchantments;
 import atm.bloodworkxgaming.oeintegration.Integrations.TiC_Modifiers;
 import atm.bloodworkxgaming.oeintegration.Proxy.CommonProxy;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -55,13 +56,11 @@ public class OreExcavationIntegration
     {
         proxy.init();
         ModCrafting.initCrafting();
-
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-
         proxy.postInit();
     }
 

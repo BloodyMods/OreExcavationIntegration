@@ -13,6 +13,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Config(modid = OreExcavationIntegration.MOD_ID)
 public class MainConfig {
 
+    @Config.Comment({"Setting this config to true will fully disable the mod and you can use OreExcavation normally.",
+            "This is better than ripping out the JAR from the mods folder"})
+    public static boolean disableMod = false;
+
+    @Config.Comment("This will disable the chat notification for all Players on the server")
+    public static boolean disableChatNotification = false;
+
     @Config.Comment("A tool in this list won't require the enchantment")
     public static String[] toolWhitelistOverride = new String[]{
 
@@ -33,10 +40,6 @@ public class MainConfig {
 
     @Config.Comment("true allows Mending and Excavate to be on the same Tool with Tinkers")
     public static boolean allowMendingTinkers = true;
-
-    @Config.Comment("Tinkers Microcrafting: blocks[false] or ToolParts[true]")
-    public static boolean ticMicrocrafting = true;
-
 
 
     @Mod.EventBusSubscriber
