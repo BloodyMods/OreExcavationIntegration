@@ -20,7 +20,7 @@ import org.apache.logging.log4j.Logger;
 public class OreExcavationIntegration
 {
     public static final String MOD_ID = "oeintegration";
-    public static final String VERSION = "2.0";
+    public static final String VERSION = "2.3";
     public static final String MOD_NAME = "OreExcavationIntegration";
     public static final String DEPENDENCIES = "after:oreexcavation";
 
