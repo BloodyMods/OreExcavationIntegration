@@ -49,6 +49,12 @@ public class MainConfig {
     @Config.Comment("true allows Mending and Excavate to be on the same Tool with Tinkers")
     public static boolean allowMendingTinkers = true;
 
+    @Config.Comment("The amount of tinkers modifers needed to reach full power.")
+    public static int maxTinkersModifersCount = 25;
+
+    @Config.Comment("The max level of enchantment needed to full power of the tool.")
+    public static int maxEnchantmentLevel = 5;
+
     @Mod.EventBusSubscriber
     static class ConfigurationHolder {
         @SubscribeEvent

@@ -41,7 +41,7 @@ public class ExcavationEnchantment extends Enchantment {
      */
     @Override
     public int getMaxLevel() {
-        return 5;
+        return MainConfig.maxEnchantmentLevel;
     }
 
     @Override

@@ -15,15 +15,12 @@ import slimeknights.tconstruct.tools.modifiers.ToolModifier;
  */
 public class ExcavateModifier extends ToolModifier {
 
-
-    public static final int baseCount = 25;
-
     public ExcavateModifier() {
         super("oreexcavate", 0xCC6600);
 
 
         this.addAspects(ModifierAspect.toolOnly,
-                new ModifierAspect.MultiAspect(this, 1, baseCount, 1));
+                new ModifierAspect.MultiAspect(this, 1, MainConfig.maxTinkersModifersCount, 1));
 
         this.addItem(ModItems.itemExcavateModifier, 1, 1);
 
