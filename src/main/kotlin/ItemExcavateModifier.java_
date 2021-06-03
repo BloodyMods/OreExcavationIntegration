@@ -1,6 +1,6 @@
-package atm.bloodworkxgaming.oeintegration.Common.Items;
+package atm.bloodworkxgaming.atm.bloodworkxgaming.Common.Items;
 
-import atm.bloodworkxgaming.oeintegration.OreExcavationIntegration;
+import atm.bloodworkxgaming.atm.bloodworkxgaming.oeintegration.OreExcavationIntegration;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;

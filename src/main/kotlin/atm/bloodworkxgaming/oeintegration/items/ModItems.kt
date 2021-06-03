@@ -1,5 +1,6 @@
-package atm.bloodworkxgaming.oeintegration
+package atm.bloodworkxgaming.oeintegration.items
 
+import atm.bloodworkxgaming.oeintegration.OreExcavationIntegration
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraftforge.registries.ForgeRegistries

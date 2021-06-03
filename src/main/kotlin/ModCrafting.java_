@@ -1,4 +1,4 @@
-package atm.bloodworkxgaming.oeintegration.Crafting;
+package atm.bloodworkxgaming.atm.bloodworkxgaming.oeintegration.crafting;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Loader;

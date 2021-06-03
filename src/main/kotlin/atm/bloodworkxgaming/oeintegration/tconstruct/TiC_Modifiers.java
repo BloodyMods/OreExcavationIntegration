@@ -1,4 +1,4 @@
-package atm.bloodworkxgaming.oeintegration.Integrations;
+package atm.bloodworkxgaming.atm.bloodworkxgaming.oeintegration.atm.bloodworkxgaming.oeintegration.integrations;
 
 import slimeknights.tconstruct.library.modifiers.Modifier;
 

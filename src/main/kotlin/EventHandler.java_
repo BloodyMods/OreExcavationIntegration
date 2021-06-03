@@ -1,4 +1,4 @@
-package atm.bloodworkxgaming.oeintegration.Handler;
+package atm.bloodworkxgaming.atm.bloodworkxgaming.oeintegration.atm.bloodworkxgaming.oeintegration.handler;
 
 import atm.bloodworkxgaming.oeintegration.MainConfig;
 import net.minecraft.item.ItemStack;
@@ -10,7 +10,7 @@ import oreexcavation.handlers.MiningAgent;
 /**
  * Created by jonas on 18.06.2017.
  */
-public class EventHandler {
+public class atm.bloodworkxgaming.oeintegration.handler.EventHandler {
     @SubscribeEvent
     public void onExcavateEvent(EventExcavate.Pre eventExcavate) {
         MiningAgent agent = eventExcavate.getAgent();
@@ -31,7 +31,7 @@ public class EventHandler {
             case DISALLOWED:
             default:
                 eventExcavate.setCanceled(true);
-                if (!MainConfig.disableChatNotification){
+                if (!atm.bloodworkxgaming.oeintegration.MainConfig.disableChatNotification){
                     agent.player.sendMessage(new TextComponentString("You need the \u00A7eExcavate Modifier \u00A7ror the \u00A76Enchantment \u00A7ron your tool to be able to excavate!"));
                 }
                 break;

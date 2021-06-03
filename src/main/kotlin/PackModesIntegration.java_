@@ -1,0 +1,18 @@
+package atm.bloodworkxgaming.atm.bloodworkxgaming.oeintegration.atm.bloodworkxgaming.oeintegration.integrations;
+
+import atm.bloodworkxgaming.oeintegration.MainConfig;
+import io.sommers.packmode.api.PackModeAPI;
+
+public class PackModesIntegration {
+    public static boolean checkIsCorrectPackmode(){
+        String currentMode = PackModeAPI.getInstance().getCurrentPackMode();
+        if (currentMode == null) return false;
+
+
+        for (String s : atm.bloodworkxgaming.oeintegration.MainConfig.packModesWhitelist) {
+            if (currentMode.equals(s)) return !atm.bloodworkxgaming.oeintegration.MainConfig.packModesWhitelistToBlacklistToggle;
+        }
+
+        return atm.bloodworkxgaming.oeintegration.MainConfig.packModesWhitelistToBlacklistToggle;
+    }
+}
