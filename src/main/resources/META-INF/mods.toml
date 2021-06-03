@@ -1,0 +1,34 @@
+# Make sure this is set to "kotlinforforge"
+modLoader="kotlinforforge"
+# Make sure this is set to the appropriate version range
+loaderVersion="[1.12,)" # Require at least 1.9.x
+# License is REQUIRED after 1.16
+license='LGPL'
+
+[[mods]]
+modId="oeintegration"
+version="${file.jarVersion}"
+displayName="OreExcavationIntegration"
+credits="thanks to Funwayguy for making OreExcavation"
+authors="OreExcavationIntegration"
+description='''
+Integrates OE into other mods.
+'''
+[[dependencies.oeintegration]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.oeintegration]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5]"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.oeintegration]]
+modId="oreexcavation"
+mandatory=true
+versionRange="[1.8,)"
+ordering="NONE"
+side="BOTH"
