@@ -14,21 +14,27 @@ authors = "OreExcavationIntegration"
 description = '''
 Integrates OE into other mods.
 '''
-[[dependencies.atm.bloodworkxgaming.oeintegration]]
+[[dependencies.oeintegration]]
 modId = "forge"
 mandatory = true
 versionRange = "[36,)"
 ordering = "NONE"
 side = "BOTH"
-[[dependencies.atm.bloodworkxgaming.oeintegration]]
+[[dependencies.oeintegration]]
 modId = "minecraft"
 mandatory = true
 versionRange = "[1.16.5]"
 ordering = "NONE"
 side = "BOTH"
-[[dependencies.atm.bloodworkxgaming.oeintegration]]
+[[dependencies.oeintegration]]
 modId = "oreexcavation"
 mandatory = true
 versionRange = "[1.8,)"
-ordering = "NONE"
+ordering = "AFTER"
+side = "BOTH"
+[[dependencies.oeintegration]]
+modId = "tconstruct"
+mandatory = false
+versionRange = "[3.0,)"
+ordering = "AFTER"
 side = "BOTH"

@@ -3,12 +3,18 @@ package atm.bloodworkxgaming.oeintegration
 import atm.bloodworkxgaming.oeintegration.enchantments.ModEnchantments
 import atm.bloodworkxgaming.oeintegration.handler.EventHandler
 import atm.bloodworkxgaming.oeintegration.items.ModItems
+import atm.bloodworkxgaming.oeintegration.tconstruct.TiCModifiers
+import net.minecraftforge.event.RegistryEvent
+import net.minecraftforge.eventbus.api.EventPriority
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.config.ModConfig
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
+import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent
 import org.apache.logging.log4j.Level
 import org.apache.logging.log4j.LogManager
+import slimeknights.tconstruct.library.modifiers.Modifier
 import thedarkcolour.kotlinforforge.forge.FORGE_BUS
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import thedarkcolour.kotlinforforge.forge.registerConfig
@@ -27,16 +33,38 @@ object OreExcavationIntegration {
         ModItems.REGISTRY.register(MOD_BUS)
         ModEnchantments.REGISTRY.register(MOD_BUS)
 
-        // MOD_BUS.addListener(atm.bloodworkxgaming.oeintegration.handler.EventHandler::onExcavateEvent)
-
         registerConfig(ModConfig.Type.COMMON, MainConfig.configSpec)
 
         FORGE_BUS.register(EventHandler)
 
+
+        MOD_BUS.addListener(EventPriority.LOWEST, this::onNewRegistry)
+
         MOD_BUS.addListener(this::onClientSetup)
+        MOD_BUS.addListener(this::onSetupEvent)
+        MOD_BUS.addListener(this::onRegisterModifier)
         FORGE_BUS.addListener(this::onServerAboutToStart)
     }
 
+    fun onNewRegistry(event: RegistryEvent.NewRegistry) {
+        println("event 3")
+
+        TiCModifiers.REGISTRY.register(FORGE_BUS)
+    }
+
+    fun onConstruct(event: FMLConstructModEvent) {
+        println("event 2")
+    }
+
+    fun onRegisterModifier(event: RegistryEvent.Register<Modifier>) {
+        println("event 1")
+
+    }
+
+
+    fun onSetupEvent(event: FMLCommonSetupEvent) {
+        println("event 2")
+    }
     /**
      * This is used for initializing client specific
      * things such as renderers and keymaps

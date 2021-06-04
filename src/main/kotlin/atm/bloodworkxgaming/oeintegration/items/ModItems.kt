@@ -12,8 +12,7 @@ import thedarkcolour.kotlinforforge.forge.KDeferredRegister
 object ModItems {
     val REGISTRY = KDeferredRegister(ForgeRegistries.ITEMS, OreExcavationIntegration.MOD_ID)
 
-    val ITEM_EXCAVATE_MODIFIER by REGISTRY.registerObject("excavatemodifier") {
-        println("should register item now")
+    val ITEM_EXCAVATE_MODIFIER by REGISTRY.registerObject("item_excavate_modifier") {
         Item(Item.Properties().tab(ItemGroup.TAB_TOOLS))
     }
 

@@ -25,6 +25,7 @@ class ExcavateModifier : Modifier( 0xCC6600) {
     }
 */
     init {
+        
 /*
         this.addAspects(
             ModifierAspect.toolOnly,

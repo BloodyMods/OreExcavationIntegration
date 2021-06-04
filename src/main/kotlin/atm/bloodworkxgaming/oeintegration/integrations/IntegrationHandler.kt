@@ -1,15 +1,19 @@
 package atm.bloodworkxgaming.oeintegration.integrations
 
 import atm.bloodworkxgaming.oeintegration.MainConfig
+import atm.bloodworkxgaming.oeintegration.OreExcavationIntegration
 import atm.bloodworkxgaming.oeintegration.enchantments.ModEnchantments
 import net.minecraft.enchantment.EnchantmentHelper
+import net.minecraft.entity.player.ServerPlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.ModList
+import slimeknights.tconstruct.library.modifiers.Modifier
+import slimeknights.tconstruct.library.modifiers.ModifierId
 import slimeknights.tconstruct.shared.TinkerMaterials
 import slimeknights.tconstruct.tools.TinkerModifiers
 import slimeknights.tconstruct.tools.TinkerTools
 
-fun runIfModLoaded(name: String, function: () -> Unit) {
+inline fun runIfModLoaded(name: String,  function: (() -> Unit)) {
     if (ModList.get().isLoaded(name)) {
         function()
     }
@@ -22,8 +26,9 @@ object IntegrationHandler {
     const val RangeModifer = 1
     const val LimitModifier = 10
 
-    fun checkCanMine(usedItem: ItemStack): IntegrationType {
+    fun checkCanMine(player: ServerPlayerEntity): IntegrationType {
         if (MainConfig.disableMod.get()) return IntegrationType.MOD_DISABLED
+        val usedItem: ItemStack = player.mainHandItem
 
         runIfModLoaded("packmode") {
             // if (PackModesIntegration.checkIsCorrectPackmode()) return IntegrationType.WHITELISTED_PACKMODE
@@ -42,28 +47,16 @@ object IntegrationHandler {
             }
         }
 
-        /*runIfModLoaded("tconstruct") {
+        runIfModLoaded("tconstruct") {
+            val itemStack = Modifier.getHeldTool(player) ?: return@runIfModLoaded
+            if (itemStack.isBroken) return@runIfModLoaded
 
-            if (usedItem.hasTag() && TinkerUtil.hasModifier(
-                    usedItem.getTagCompound(),
-                    "oreexcavate"
-                )
-            ) {
-                if (!ToolHelper.isBroken(usedItem)) {
+            for (modifierEntry in itemStack.modifierList) {
+                if (modifierEntry.modifier.registryName == ModifierId(OreExcavationIntegration.MOD_ID, "modifier_excavate"))
                     return IntegrationType.TINKERS_CONSTRUCT
-                }
             }
-        }*/
+        }
 
-        /*if (Loader.isModLoaded("tconstruct") && usedItem.hasTagCompound() && TinkerUtil.hasModifier(
-                usedItem.getTagCompound(),
-                "oreexcavate"
-            )
-        ) {
-            if (!ToolHelper.isBroken(usedItem)) {
-                return IntegrationType.TINKERS_CONSTRUCT
-            }
-        }*/
         return IntegrationType.DISALLOWED
     }
 

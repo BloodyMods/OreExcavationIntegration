@@ -29,8 +29,7 @@ object EventHandler {
             }
         }
 
-        val held = agent.player.mainHandItem
-        val canMine = IntegrationHandler.checkCanMine(held)
+        val canMine = IntegrationHandler.checkCanMine(agent.player)
         println(canMine)
         when (canMine) {
             TINKERS_CONSTRUCT -> println("should work!")
