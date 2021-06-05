@@ -22,10 +22,10 @@
       "item": "minecraft:redstone"
     },
     "s": {
-      "item": "minecraft:slimeball"
+      "item": "minecraft:slime_ball"
     },
     "i": {
-      "tag": "forge:ingot/iron"
+      "tag": "forge:ingots/iron"
     }
   }
 }

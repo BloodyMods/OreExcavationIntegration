@@ -1,13 +1,15 @@
 package atm.bloodworkxgaming.oeintegration.handler
 
 import atm.bloodworkxgaming.oeintegration.MainConfig
-import atm.bloodworkxgaming.oeintegration.OreExcavationIntegration
 import atm.bloodworkxgaming.oeintegration.OreExcavationIntegration.LOGGER
 import atm.bloodworkxgaming.oeintegration.integrations.IntegrationHandler
-import atm.bloodworkxgaming.oeintegration.integrations.IntegrationType
-import atm.bloodworkxgaming.oeintegration.integrations.IntegrationType.*
+import atm.bloodworkxgaming.oeintegration.integrations.IntegrationType.DISALLOWED
+import atm.bloodworkxgaming.oeintegration.integrations.IntegrationType.ENCHANTMENT
+import atm.bloodworkxgaming.oeintegration.integrations.IntegrationType.MOD_DISABLED
+import atm.bloodworkxgaming.oeintegration.integrations.IntegrationType.TINKERS_CONSTRUCT
+import atm.bloodworkxgaming.oeintegration.integrations.IntegrationType.WHITELIST
+import atm.bloodworkxgaming.oeintegration.integrations.IntegrationType.WHITELISTED_PACKMODE
 import net.minecraft.util.text.ChatType
-import net.minecraft.util.text.ITextComponent
 import net.minecraft.util.text.TranslationTextComponent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import oreexcavation.events.EventExcavate
@@ -20,46 +22,26 @@ object EventHandler {
 
         LOGGER.info(eventExcavate)
 
-        fun cancelEvent(){
+        fun cancelEvent() {
             eventExcavate.isCanceled = true
             if (!MainConfig.disableChatNotification.get()) {
-                LOGGER.warn("should be canceled!")
                 // ("You need the \u00A7eExcavate Modifier \u00A7ror the \u00A76Enchantment \u00A7ron your tool to be able to excavate!")
-                agent.player.sendMessage(TranslationTextComponent("lang.translation.event.canceled"), ChatType.GAME_INFO, UUID.randomUUID())
+                agent.player.sendMessage(
+                    TranslationTextComponent("chat.oeintegration.excavate.canceled"),
+                    ChatType.GAME_INFO,
+                    UUID.randomUUID()
+                )
             }
         }
 
         val canMine = IntegrationHandler.checkCanMine(agent.player)
         println(canMine)
         when (canMine) {
-            TINKERS_CONSTRUCT -> println("should work!")
-            ENCHANTMENT -> println("should work!")
+            TINKERS_CONSTRUCT -> IntegrationHandler.changeToolOverwriteTinkers(agent)
+            ENCHANTMENT -> IntegrationHandler.changeToolOverwriteEnchantment(agent)
             DISALLOWED -> cancelEvent()
-            MOD_DISABLED, WHITELISTED_PACKMODE, WHITELIST -> {/* All fine, continue mining */}
+            MOD_DISABLED, WHITELISTED_PACKMODE, WHITELIST -> {/* All fine, continue mining */
+            }
         }
     }
-
-    /*switch (IntegrationHandler.checkCanMine(held))
-    {
-        case WHITELIST :
-        case MOD_DISABLED :
-        case WHITELISTED_PACKMODE :
-        break;
-        case ENCHANTMENT :
-        IntegrationHandler.changeToolOverwriteEnchantment(agent);
-        break;
-        case TINKERS_CONSTRUCT :
-        IntegrationHandler.changeToolOverwriteTinkers(agent);
-        break;
-        case DISALLOWED :
-        default:
-        eventExcavate.setCanceled(true);
-        if (!atm.bloodworkxgaming.oeintegration.MainConfig.disableChatNotification) {
-            agent.player.sendMessage(new TextComponentString ("You need the \u00A7eExcavate Modifier \u00A7ror the \u00A76Enchantment \u00A7ron your tool to be able to excavate!"));
-        }
-        break;
-
-    }*/
-
-
 }

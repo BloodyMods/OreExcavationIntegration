@@ -41,30 +41,13 @@ object OreExcavationIntegration {
         MOD_BUS.addListener(EventPriority.LOWEST, this::onNewRegistry)
 
         MOD_BUS.addListener(this::onClientSetup)
-        MOD_BUS.addListener(this::onSetupEvent)
-        MOD_BUS.addListener(this::onRegisterModifier)
         FORGE_BUS.addListener(this::onServerAboutToStart)
     }
 
     fun onNewRegistry(event: RegistryEvent.NewRegistry) {
-        println("event 3")
-
-        TiCModifiers.REGISTRY.register(FORGE_BUS)
+        TiCModifiers.REGISTRY.register(MOD_BUS)
     }
 
-    fun onConstruct(event: FMLConstructModEvent) {
-        println("event 2")
-    }
-
-    fun onRegisterModifier(event: RegistryEvent.Register<Modifier>) {
-        println("event 1")
-
-    }
-
-
-    fun onSetupEvent(event: FMLCommonSetupEvent) {
-        println("event 2")
-    }
     /**
      * This is used for initializing client specific
      * things such as renderers and keymaps

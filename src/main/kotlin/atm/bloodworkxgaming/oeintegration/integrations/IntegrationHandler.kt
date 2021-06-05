@@ -3,10 +3,15 @@ package atm.bloodworkxgaming.oeintegration.integrations
 import atm.bloodworkxgaming.oeintegration.MainConfig
 import atm.bloodworkxgaming.oeintegration.OreExcavationIntegration
 import atm.bloodworkxgaming.oeintegration.enchantments.ModEnchantments
+import atm.bloodworkxgaming.oeintegration.tconstruct.TiCModifiers
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.player.ServerPlayerEntity
 import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.ModList
+import oreexcavation.core.ExcavationSettings
+import oreexcavation.handlers.MiningAgent
+import oreexcavation.overrides.ToolOverride
+import slimeknights.tconstruct.library.TinkerRegistries
 import slimeknights.tconstruct.library.modifiers.Modifier
 import slimeknights.tconstruct.library.modifiers.ModifierId
 import slimeknights.tconstruct.shared.TinkerMaterials
@@ -60,38 +65,33 @@ object IntegrationHandler {
         return IntegrationType.DISALLOWED
     }
 
-    /*fun changeToolOverwriteEnchantment(agent: MiningAgent) {
-        val held: ItemStack = agent.player.getHeldItemMainhand()
+    fun changeToolOverwriteEnchantment(agent: MiningAgent) {
+        val held: ItemStack = agent.player.mainHandItem
 
         // enchantment data
-        val enchantmentLevel: Int = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.excavationEnchantment, held)
-        val maxLevel: Int = ModEnchantments.excavationEnchantment.getMaxLevel()
+        val enchantmentLevel: Int = EnchantmentHelper.getItemEnchantmentLevel(ModEnchantments.ENCHANTMENT_EXCAVATION, held)
+        val maxLevel: Int = ModEnchantments.ENCHANTMENT_EXCAVATION.maxLevel
 
 
         // gets a new toolOverwrite
         val toolProps: ToolOverride = ToolOverride.readFromString("*")
         val modifier = enchantmentLevel.toFloat() / maxLevel.toFloat()
-        toolProps.setRange((ExcavationSettings.mineRange * modifier) as Int + RangeModifer)
-        toolProps.setLimit((ExcavationSettings.mineLimit * modifier) as Int + LimitModifier)
+        toolProps.range = (ExcavationSettings.mineRange * modifier).toInt() + RangeModifer
+        toolProps.limit = (ExcavationSettings.mineLimit * modifier).toInt() + LimitModifier
         agent.toolProps = toolProps
     }
 
-    fun changeToolOverwriteTinkers(agent: MiningAgent) {
-        val held: ItemStack = agent.player.getHeldItemMainhand()
-        val modifier: NBTTagCompound = TinkerUtil.getModifierTag(held, "oreexcavate")
-        val enchantmentLevel: Int = modifier.getInteger("current")
-        val maxLevel: Int = modifier.getInteger("max")
 
+    fun changeToolOverwriteTinkers(agent: MiningAgent) {
+        val itemStack = Modifier.getHeldTool(agent.player) ?: return
+        val level = itemStack.getModifierLevel(TiCModifiers.MODIFIER_EXCAVATE)
+        val maxLevel: Int = 5 //TODO! Get way to find max level!
 
         // gets a new toolOverwrite
         val toolProps: ToolOverride = ToolOverride.readFromString("*")
-        val modifierModifier = enchantmentLevel.toFloat() / maxLevel.toFloat()
-        toolProps.setRange(
-            Math.ceil((ExcavationSettings.mineRange * modifierModifier).toDouble()).toInt() + RangeModifer
-        )
-        toolProps.setLimit(
-            Math.ceil((ExcavationSettings.mineLimit * modifierModifier).toDouble()).toInt() + LimitModifier
-        )
+        val factor = level.toFloat() / maxLevel.toFloat()
+        toolProps.range = (ExcavationSettings.mineRange * factor).toInt() + RangeModifer
+        toolProps.limit = (ExcavationSettings.mineLimit * factor).toInt() + LimitModifier
         agent.toolProps = toolProps
-    }*/
+    }
 }
