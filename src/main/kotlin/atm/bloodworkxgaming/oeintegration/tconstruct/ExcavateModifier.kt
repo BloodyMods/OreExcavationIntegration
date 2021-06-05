@@ -1,11 +1,11 @@
 package atm.bloodworkxgaming.oeintegration.tconstruct
 
-import slimeknights.tconstruct.library.modifiers.Modifier
+import slimeknights.tconstruct.library.modifiers.IncrementalModifier
 
 /**
  * Created by jonas on 19.06.2017.
  */
-class ExcavateModifier : Modifier( 0xCC6600) {
+class ExcavateModifier : IncrementalModifier( 0xCC6600) {
     /*
     fun canApplyTogether(enchantment: Enchantment): Boolean {
         return MainConfig.allowMendingTinkers || enchantment !== Enchantments.MENDING

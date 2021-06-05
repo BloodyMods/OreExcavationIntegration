@@ -20,12 +20,9 @@ object EventHandler {
     fun onExcavateEvent(eventExcavate: EventExcavate.Pre) {
         val agent = eventExcavate.agent
 
-        LOGGER.info(eventExcavate)
-
         fun cancelEvent() {
             eventExcavate.isCanceled = true
             if (!MainConfig.disableChatNotification.get()) {
-                // ("You need the \u00A7eExcavate Modifier \u00A7ror the \u00A76Enchantment \u00A7ron your tool to be able to excavate!")
                 agent.player.sendMessage(
                     TranslationTextComponent("chat.oeintegration.excavate.canceled"),
                     ChatType.GAME_INFO,
@@ -34,9 +31,7 @@ object EventHandler {
             }
         }
 
-        val canMine = IntegrationHandler.checkCanMine(agent.player)
-        println(canMine)
-        when (canMine) {
+        when (IntegrationHandler.checkCanMine(agent.player)) {
             TINKERS_CONSTRUCT -> IntegrationHandler.changeToolOverwriteTinkers(agent)
             ENCHANTMENT -> IntegrationHandler.changeToolOverwriteEnchantment(agent)
             DISALLOWED -> cancelEvent()

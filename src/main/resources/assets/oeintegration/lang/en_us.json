@@ -1,16 +1,14 @@
 {
-  "__comment": "Enchantments",
-  "enchantment.oeintegration.oreexcavation":                 "Excavate",
-  "enchantment.oeintegration.oreexcavation.desc": "Allows this tool to be used with OreExcavation",
-
-  "__comment": "Items",
-  "item.oeintegration.item_excavate_modifier": "Excavate Modifier",
-
-  "__comment": "Modifiers",
-  "modifier.oeintegration.modifier_excavate":  "Excavate",
+  "__comment":                                     "Enchantments",
+  "enchantment.oeintegration.oreexcavation":       "Excavate",
+  "enchantment.oeintegration.oreexcavation.desc":  "Allows this tool to be used with OreExcavation",
+  "__comment":                                     "Items",
+  "item.oeintegration.item_excavate_modifier":     "Excavate Modifier",
+  "__comment":                                     "Modifiers",
+  "modifier.oeintegration.modifier_excavate":      "Excavate",
   "modifier.oeintegration.modifier_excavate.desc": "Allows this tool to be used with OreExcavation",
+  "__comment":                                     "Chat",
+  "chat.oeintegration.excavate.canceled":          "You need the §eExcavate Modifier §ror the §6Enchantment §ron your tool to be able to excavate!"
 
-  "__comment": "Chat",
-  "chat.oeintegration.excavate.canceled": "You need the \u00A7eExcavate Modifier \u00A7ror the \u00A76Enchantment \u00A7ron your tool to be able to excavate!"
 }
 

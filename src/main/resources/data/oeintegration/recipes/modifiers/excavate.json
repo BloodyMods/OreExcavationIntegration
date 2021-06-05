@@ -1,17 +1,18 @@
 {
-  "type": "tconstruct:modifier",
-  "inputs": [
-    {
+  "type": "tconstruct:incremental_modifier",
+  "input":    {
       "item": "oeintegration:item_excavate_modifier"
-    }
-  ],
-  "tools": {
-    "tag": "tconstruct:modifiable/melee_or_harvest"
+    },
+  "amount_per_item": 1,
+  "needed_per_level": 10,
+  "tools":
+  {
+    "tag": "tconstruct:modifiable/harvest"
   },
   "result": {
     "name": "oeintegration:modifier_excavate",
     "level": 1
   },
-  "max_level": 5,
+  "max_level": 1,
   "upgrade_slots": 1
 }

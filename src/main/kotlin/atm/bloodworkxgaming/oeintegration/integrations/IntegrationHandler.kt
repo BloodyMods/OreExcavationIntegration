@@ -85,13 +85,12 @@ object IntegrationHandler {
     fun changeToolOverwriteTinkers(agent: MiningAgent) {
         val itemStack = Modifier.getHeldTool(agent.player) ?: return
         val level = itemStack.getModifierLevel(TiCModifiers.MODIFIER_EXCAVATE)
-        val maxLevel: Int = 5 //TODO! Get way to find max level!
+        val scaled = TiCModifiers.MODIFIER_EXCAVATE.getScaledLevel(itemStack, level)
 
         // gets a new toolOverwrite
         val toolProps: ToolOverride = ToolOverride.readFromString("*")
-        val factor = level.toFloat() / maxLevel.toFloat()
-        toolProps.range = (ExcavationSettings.mineRange * factor).toInt() + RangeModifer
-        toolProps.limit = (ExcavationSettings.mineLimit * factor).toInt() + LimitModifier
+        toolProps.range = (ExcavationSettings.mineRange * scaled).toInt() + RangeModifer
+        toolProps.limit = (ExcavationSettings.mineLimit * scaled).toInt() + LimitModifier
         agent.toolProps = toolProps
     }
 }
